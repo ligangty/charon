@@ -44,7 +44,7 @@ setup(
     package_data={'charon': ['schemas/*.json']},
     test_suite="tests",
     entry_points={
-        "console_scripts": ["charon = charon.cmd:cli"],
+        'console_scripts': ['charon = charon.cli.main:run'],
     },
     install_requires=[
         "Jinja2>=3.1.3",
