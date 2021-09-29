@@ -29,6 +29,7 @@ import sys
 
 logger = logging.getLogger(__name__)
 
+# TODO: need to move to cli.main
 
 @argument(
     "path",
