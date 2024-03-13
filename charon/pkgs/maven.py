@@ -271,6 +271,7 @@ def handle_maven_uploading(
     gen_sign=False,
     cf_enable=False,
     key=None,
+    force=False,
     dry_run=False,
     manifest_bucket_name=None,
     config=None
