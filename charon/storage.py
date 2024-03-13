@@ -109,20 +109,23 @@ class S3Client(object):
     def upload_files(
         self, file_paths: List[str],
         targets: List[Tuple[str, str]],
-        product: str, root="/"
+        product: str, root="/",
+        force=False
     ) -> List[str]:
         """ Upload a list of files to s3 bucket. * Use the cut down file path as s3 key. The cut
         down way is move root from the file path if it starts with root. Example: if file_path is
         /tmp/maven-repo/org/apache/.... and root is /tmp/maven-repo Then the key will be
         org/apache/.....
-            * The product will be added as the extra metadata with key "rh-products". For
-            example, if the product for a file is "apache-commons", the metadata of that file
-            will contain "rh-products":"apache-commons"
+            * The product will be added as the extra metadata in a companied file with ".prodinfo"
+            suffix. For example, if the product for a file "commons-io-1.5.2.jar" is "apache-commons",
+            the "apache-commons" will be treated as metadata of this file and added into a name
+            "commons-io-1.5.2.jar.prodinfo" in same path.
             * For existed files, the upload will not override them, as the metadata of
             "rh-products" will be updated to add the new product. For example, if an exited file
             with new product "commons-lang3" is uploaded based on existed metadata
             "apache-commons", the file will not be overridden, but the metadata will be changed to
-            "rh-products": "apache-commons,commons-lang3"
+            "rh-products": "apache-commons,commons-lang3". Note: if in force mode, the files will
+            be overwittern even if they are alreay exist.
             * Every file has sha1 checksum in "checksum" metadata. When uploading existed files,
             if the checksum does not match the existed one, will not upload it and report error.
             Note that if file name match

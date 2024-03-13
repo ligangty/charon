@@ -122,6 +122,17 @@ logger = logging.getLogger(__name__)
     """,
 )
 @option(
+    "--force",
+    "-f",
+    is_flag=True,
+    help="""
+    Upload all files forcibly, which will overwrite all existed artifacts which are contained
+    in the product tarball. 
+    Warning: As this will do overwritting of the existed artifacts, so make sure if this flag
+    is really needed before uploading.
+    """
+)
+@option(
     "--debug",
     "-D",
     help="Debug mode, will print all debug logs for problem tracking.",
@@ -158,6 +169,7 @@ def upload(
     config: str = None,
     contain_signature: bool = False,
     sign_key: str = "redhatdevel",
+    force=False,
     debug=False,
     quiet=False,
     dryrun=False,
